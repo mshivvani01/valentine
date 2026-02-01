@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💖</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: #ffe6ee;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: #444;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ---------- BUTTON PLAYGROUND ---------- */
+    .playground {
+      position: relative;
+      width: 100%;
+      height: 120px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 12px 32px;
+      font-size: 16px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover { transform: scale(1.05); }
+
+    .yes {
+      left: 50%;
+      top: 40px;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      color: white;
+      z-index: 2;
+    }
+
+    .no {
+      left: 10%;
+      top: 40px;
+      background: transparent;
+      border: 2px solid #ff758f;
+      color: #ff4d6d;
+      z-index: 1;
+    }
+
+    /* ---------- FIRST PAGE ---------- */
+    .first-page {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffd1dc, #fff0f5);
+    }
+
+    .card {
+      background: rgba(255,255,255,0.9);
+      padding: 45px;
+      border-radius: 30px;
+      text-align: center;
+      max-width: 420px;
+      box-shadow: 0 25px 50px rgba(255,77,109,0.3);
+      animation: pop 0.6s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* ---------- SECOND PAGE ---------- */
+    .split {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* PHOTO COLLAGE */
+    .collage {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 12px;
+      padding: 20px;
+      background: #ffd1dc;
+    }
+
+    .collage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    /* MESSAGE SIDE */
+    .text {
+      flex: 1;
+      padding: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #fff0f5, #ffe6ee);
+    }
+
+    .text-card {
+      width: 100%;
+      max-width: 520px;
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(6px);
+      padding: 45px;
+      border-radius: 30px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      animation: pop 0.6s ease;
+      position: relative;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .split {
+        flex-direction: column;
+      }
+
+      .collage {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 120px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- FIRST PAGE -->
+<div class="first-page" id="firstPage">
+  <div class="card">
+    <h1>Will you be my Valentine? 💖</h1>
+    <p>
+      One button is emotionally unavailable…  
+      good luck 😌
+    </p>
+
+    <div class="playground">
+      <button class="btn yes" onclick="goSecond()">Yes 💕</button>
+      <button class="btn no" onmouseenter="escape(this)">No 🙃</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function escape(btn) {
+    const area = btn.parentElement;
+    const maxX = area.clientWidth - btn.offsetWidth;
+    const maxY = area.clientHeight - btn.offsetHeight;
+
+    let x, y;
+    do {
+      x = Math.random() * maxX;
+      y = Math.random() * maxY;
+    } while (Math.abs(x - maxX / 2) < 90);
+
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+  }
+
+  function goSecond() {
+    document.body.innerHTML = `
+      <div class="split">
+
+        <div class="collage">
+          <img src="img1.jpg">
+          <img src="img2.jpg">
+          <img src="img3.jpg">
+          <img src="img4.jpg">
+          <img src="img5.jpg">
+          <img src="img6.jpg">
+        </div>
+
+        <div class="text">
+          <div class="text-card">
+            <h1>Okay… but listen 🥹💘</h1>
+            <p>
+              Every picture on the left holds a little piece of us —
+              moments that made me smile without trying,
+              memories that still feel warm.
+              <br><br>
+              I love how easy everything feels with you.
+              The laughs, the comfort, the quiet moments,
+              and the way even ordinary days feel special.
+              <br><br>
+              I don’t want perfection or big promises.
+              I just want *you* —
+              today, tomorrow, and all the little moments in between.
+              <br><br>
+              So I’m asking again,
+              properly this time,
+              with a full heart and no escape plans…
+            </p>
+
+            <div class="playground">
+              <button class="btn yes" onclick="finalYes()">Yes 💖</button>
+              <button class="btn no" onmouseenter="escape(this)">No 🙃</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  function finalYes() {
+    document.querySelector(".text-card").innerHTML = `
+      <h1>YAYYY 🥹💘</h1>
+      <p style="font-size:16px;">
+        No more running now.
+        <br><br>
+        You’re my Valentine,
+        my favourite person,
+        and my happiest choice.
+        <br><br>
+        Thank you for choosing me 💕
+      </p>
+    `;
+  }
+</script>
+</body>
+</html>
+
